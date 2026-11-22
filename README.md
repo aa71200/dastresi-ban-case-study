@@ -15,3 +15,7 @@ Customers can see their purchase date, expiry date, and time remaining. Admins c
 ![WooCommerce access status for an active buyer and an expired buyer](docs/customer-access-status.png)
 
 The screenshots show a local demo with sample orders. Interface labels were translated for the English portfolio.
+
+## Code sample
+
+The [purchase access sample](examples/purchase-access/README.md) includes the underlying order lookup and eligibility logic. Its integration fixture creates real WooCommerce orders in a disposable WordPress database to demonstrate the four access states and duration inheritance for variations.
