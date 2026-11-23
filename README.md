@@ -1,5 +1,7 @@
 # Dastresi-Ban
 
+**What to try.** See the purchase-access flow, visual access card builder and shared Elementor controls. Follow the focused examples for runnable checks.
+
 [![WordPress and WooCommerce integration checks](https://github.com/aa71200/dastresi-ban-case-study/actions/workflows/checks.yml/badge.svg?branch=main)](https://github.com/aa71200/dastresi-ban-case-study/actions/workflows/checks.yml)
 
 **Commercial WordPress plugin by Amirhossein · CodexaWP.** A store needs to grant access after a qualifying WooCommerce purchase and expire it at the configured time. This case study follows the order eligibility logic and the migration of existing status-card templates and history.
@@ -22,6 +24,9 @@ The screenshots show a local demo with sample orders. Interface labels were tran
 
 ## Code sample
 
+- [Access Status Card Builder](examples/access-status-builder) shows how smaller screens inherit styling and how a card orientation can override it.
+- [Classic and Atomic Elementor access controls](examples/elementor-access-controls) shows how both editors use the same access-rule fields while Atomic stores typed properties.
+
 The [purchase access sample](examples/purchase-access/README.md) includes the order lookup and eligibility logic. Its integration fixture creates synthetic WooCommerce orders for four access states and variation duration inheritance. The full product's page, shortcode and Elementor enforcement are outside this code sample.
 
 The [template storage upgrade sample](examples/template-storage-upgrade/README.md) documents the legacy-data backup, tests an interrupted migration and verifies what remains after a successful retry.
@@ -32,4 +37,5 @@ The [template storage upgrade sample](examples/template-storage-upgrade/README.m
 | --- | --- |
 | Template storage upgrade sample | See the [GPL license in that sample](examples/template-storage-upgrade/LICENSE). |
 | Purchase access excerpt | Selected Dastresi-Ban classes shared for portfolio review. See the [source note](examples/purchase-access/README.md#source). A separate redistribution license is unspecified. |
+| Builder and Elementor excerpts | Selected source and synthetic fixtures shared for portfolio review. |
 | Case-study PDF and screenshots | CodexaWP portfolio documentation. The migration sample's code license is scoped to that sample. |
