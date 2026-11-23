@@ -44,7 +44,7 @@ final class WooCommercePurchaseIndex {
 		$key      = md5( serialize( [ $user_id, $statuses, $order_direction, $limit ] ) ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.serialize_serialize
 
 		if ( ! array_key_exists( $key, self::$purchases ) ) {
-			$orders = wc_get_orders(
+			self::$purchases[ $key ] = self::index_orders(
 				[
 					'customer_id' => $user_id,
 					'status'      => $statuses,
@@ -55,7 +55,6 @@ final class WooCommercePurchaseIndex {
 				]
 			);
 
-			self::$purchases[ $key ] = self::index_orders( (array) $orders, $order_direction );
 		}
 
 		return isset( self::$purchases[ $key ][ $product_id ] )
@@ -69,10 +68,10 @@ final class WooCommercePurchaseIndex {
 		$statuses  = wc_get_is_paid_statuses();
 		$key       = md5( serialize( [ 'legacy', $customers, $statuses ] ) ); // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.serialize_serialize
 		if ( ! isset( self::$purchases[ $key ] ) ) {
-			self::$purchases[ $key ] = self::index_orders( (array) wc_get_orders( [
+			self::$purchases[ $key ] = self::index_orders( [
 				'customer' => $customers, 'status' => $statuses, 'limit' => -1,
 				'orderby' => 'date', 'order' => 'DESC', 'return' => 'objects',
-			] ) );
+			] );
 		}
 		return self::$purchases[ $key ][ absint( $product_id ) ] ?? [];
 	}
@@ -89,12 +88,44 @@ final class WooCommercePurchaseIndex {
 	/**
 	 * Build product and variation indexes from an order result.
 	 *
-	 * @param array $orders WooCommerce order objects.
-	 * @return array
+	 * @param array $query WooCommerce order query arguments.
+	 * @return array Purchase rows grouped by product.
 	 */
-	private static function index_orders( array $orders, $direction = 'DESC' ) {
+	private static function index_orders( array $query ) {
 		$index = [];
+		foreach ( self::order_pages( $query ) as $orders ) {
+			self::index_page( $orders, $index );
+		}
+		$direction = $query['order'];
+		foreach ( $index as &$purchases ) {
+			usort( $purchases, static function ( $a, $b ) use ( $direction ) {
+				$order = ( $a['purchased_at'] <=> $b['purchased_at'] ) ?: ( $a['order_id'] <=> $b['order_id'] );
+				return 'ASC' === $direction ? $order : -$order;
+			} );
+		}
+		unset( $purchases );
+		return $index;
+	}
 
+	private static function order_pages( array $query ): \Generator {
+		if ( -1 !== (int) $query['limit'] ) {
+			yield (array) wc_get_orders( $query );
+			return;
+		}
+		$query['orderby'] = 'ID';
+		$query['order'] = 'ASC';
+		$query['limit'] = 100;
+		for ( $page = 1; ; ++$page ) {
+			$query['paged'] = $page;
+			$orders = (array) wc_get_orders( $query );
+			yield $orders;
+			if ( count( $orders ) < $query['limit'] ) {
+				return;
+			}
+		}
+	}
+
+	private static function index_page( array $orders, array &$index ): void {
 		foreach ( $orders as $order ) {
 			if ( ! $order instanceof \WC_Order ) {
 				continue;
@@ -137,14 +168,6 @@ final class WooCommercePurchaseIndex {
 			}
 		}
 
-		foreach ( $index as &$purchases ) {
-			usort( $purchases, static function ( $a, $b ) use ( $direction ) {
-				$order = ( $a['purchased_at'] <=> $b['purchased_at'] ) ?: ( $a['order_id'] <=> $b['order_id'] );
-				return 'ASC' === $direction ? $order : -$order;
-			} );
-		}
-		unset( $purchases );
-		return $index;
 	}
 
 	/** Ignore unallocated order refunds and tax-only refunds; only this line is authoritative. */
