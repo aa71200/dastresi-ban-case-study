@@ -1,6 +1,8 @@
 # Dastresi-Ban
 
-Dastresi-Ban is a commercial WordPress plugin that grants time-limited access to protected content after a qualifying WooCommerce purchase. Admins can configure access rules and customise the card that shows a customer when their access expires.
+[![WordPress and WooCommerce integration checks](https://github.com/aa71200/dastresi-ban-case-study/actions/workflows/checks.yml/badge.svg?branch=main)](https://github.com/aa71200/dastresi-ban-case-study/actions/workflows/checks.yml)
+
+Store owners need a way to grant access after a qualifying purchase and revoke it when the purchase window expires. Dastresi-Ban is the commercial WordPress plugin behind this case study. Admins can configure the access rules and customise the card that shows each customer their expiry.
 
 [Read the English case study (PDF)](docs/Dastresi-Ban-WooCommerce-Case-Study.pdf) · [See the product on RTL Theme](https://www.rtl-theme.com/dastresiban-wordpress-plugin/)
 
