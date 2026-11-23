@@ -18,6 +18,8 @@ Use disposable single-site WordPress with WooCommerce active and <code>WP_ENVIRO
 
 The test creates synthetic buyers, products, and completed orders. Six checks passed with WordPress 7.1.3, WooCommerce 11.1.2, and PHP 8.2.12.
 
+Pass `--paging` to create 1,001 additional synthetic purchases and compare the paged results with an unbounded order query. The command prints query and peak-memory measurements from the test environment. The fixture checks that paging preserves the oldest qualifying purchase and does not duplicate or miss order IDs.
+
 ## Source
 
 Selected classes from Dastresi-Ban 2.0.0 by CodexaWP, shared for portfolio review. The fixture is adapted from the product's real WooCommerce integration test.

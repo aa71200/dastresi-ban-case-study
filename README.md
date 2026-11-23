@@ -2,9 +2,11 @@
 
 [![WordPress and WooCommerce integration checks](https://github.com/aa71200/dastresi-ban-case-study/actions/workflows/checks.yml/badge.svg?branch=main)](https://github.com/aa71200/dastresi-ban-case-study/actions/workflows/checks.yml)
 
-Store owners need a way to grant access after a qualifying purchase and revoke it when the purchase window expires. Dastresi-Ban is the commercial WordPress plugin behind this case study. Admins can configure the access rules and customise the card that shows each customer their expiry.
+**Commercial WordPress plugin by Amirhossein · CodexaWP.** A store needs to grant access after a qualifying WooCommerce purchase and expire it at the configured time. This case study follows the order eligibility logic and the migration of existing status-card templates and history.
 
-[Read the English case study (PDF)](docs/Dastresi-Ban-WooCommerce-Case-Study.pdf) · [See the product on RTL Theme](https://www.rtl-theme.com/dastresiban-wordpress-plugin/)
+[Product listing on RTL Theme](https://www.rtl-theme.com/dastresiban-wordpress-plugin/) · [English case study (PDF)](docs/Dastresi-Ban-WooCommerce-Case-Study.pdf) · [Migration verification](examples/template-storage-upgrade/README.md)
+
+The migration keeps the original data and activates the new storage only after validation. The fixture interrupts the migration and verifies that a retry preserves the template IDs, default template, and history. The storefront outcome below was recorded on a disposable test shop.
 
 ## A 30-day workshop pass
 
@@ -20,7 +22,7 @@ The screenshots show a local demo with sample orders. Interface labels were tran
 
 ## Code sample
 
-The [purchase access sample](examples/purchase-access/README.md) includes the underlying order lookup and eligibility logic. Its integration fixture creates real WooCommerce orders in a disposable WordPress database to demonstrate the four access states and duration inheritance for variations.
+The [purchase access sample](examples/purchase-access/README.md) includes the order lookup and eligibility logic. Its integration fixture creates synthetic WooCommerce orders for four access states and variation duration inheritance. The full product's page, shortcode and Elementor enforcement are outside this code sample.
 
 The [template storage upgrade sample](examples/template-storage-upgrade/README.md) documents the legacy-data backup, tests an interrupted migration and verifies what remains after a successful retry.
 
