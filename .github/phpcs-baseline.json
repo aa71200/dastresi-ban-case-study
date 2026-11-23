@@ -18,25 +18,12 @@
             "WARNING Internal.LineEndings.Mixed": 1
         },
         "examples/elementor-access-controls/src/class-elementor-rule-defaults.php": {
-            "ERROR Generic.Files.LineEndings.InvalidEOLChar": 1,
-            "ERROR Generic.Formatting.DisallowMultipleStatements.SameLine": 1,
-            "ERROR Generic.WhiteSpace.DisallowSpaceIndent.SpacesUsed": 44,
-            "ERROR PSR2.Namespaces.NamespaceDeclaration.BlankLineAfter": 1,
             "ERROR Squiz.Commenting.ClassComment.Missing": 1,
             "ERROR Squiz.Commenting.FileComment.MissingPackageTag": 1,
             "ERROR Squiz.Commenting.FileComment.SpacingAfterComment": 1,
             "ERROR Squiz.Commenting.FunctionComment.Missing": 2,
             "ERROR Squiz.Commenting.FunctionComment.MissingParamTag": 1,
-            "ERROR Squiz.ControlStructures.ControlSignature.NewlineAfterOpenBrace": 7,
-            "ERROR Squiz.Functions.MultiLineFunctionDeclaration.SpaceAfterFunction": 1,
-            "ERROR Universal.Arrays.DisallowShortArraySyntax.Found": 5,
-            "ERROR Universal.WhiteSpace.CommaSpacing.TooMuchSpaceAfter": 1,
-            "ERROR WordPress.Arrays.ArrayDeclarationSpacing.ArrayItemNoNewLine": 16,
-            "ERROR WordPress.Files.FileName.InvalidClassFileName": 1,
-            "ERROR WordPress.WhiteSpace.ControlStructureSpacing.BlankLineAfterEnd": 1,
-            "WARNING Generic.Formatting.MultipleStatementAlignment.NotSameWarning": 5,
-            "WARNING Internal.LineEndings.Mixed": 1,
-            "WARNING WordPress.Arrays.MultipleStatementAlignment.DoubleArrowNotAligned": 7
+            "ERROR WordPress.Files.FileName.InvalidClassFileName": 1
         },
         "examples/elementor-access-controls/src/class-elementor-settings-codec.php": {
             "ERROR Generic.Files.LineEndings.InvalidEOLChar": 1,
